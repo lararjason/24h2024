@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Getting Started with ml5.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+  </head>
+
+  <body>
+    <script>
+      // Your code will go here
+      // open up your console - if everything loaded properly you should see the correct version number
+        // Create the character level generator with a pre trained model
+        const rnn = ml5.charRNN('ml5/models/charRNN/bolano/', modelLoaded);
+
+        // When the model is loaded
+        function modelLoaded() {
+        console.log('Model Loaded!');
+        }
+
+        // Generate content
+        rnn.generate({
+            seed: 'The meaning of pizza is',
+            length: 200,
+            temperature: 0.5,
+            }, (err, results) => {
+              
+            let needle = results.sample.lastIndexOf(".");
+            const sentence = results.sample.slice(0, needle);
+            console.log(results.sample);
+            console.log(sentence);
+            console.log(needle);
+        });
+    </script>
+  </body>
+</html>
